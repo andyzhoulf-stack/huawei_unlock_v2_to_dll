@@ -1,0 +1,17 @@
+name: Build DLL
+
+on: [push]
+
+jobs:
+  build-windows-dll:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build DLL
+      run: |
+        cl /LD encrypt_1.cpp /Feencrypt1.dll
+    - name: Upload DLL
+      uses: actions/upload-artifact@v3
+      with:
+        name: encrypt1
+        path: encrypt1.dll
