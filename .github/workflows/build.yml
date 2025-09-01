@@ -1,17 +1,14 @@
-name: Build DLL
+- uses: actions/checkout@v3
 
-on: [push]
+- name: Setup MSBuild
+  uses: microsoft/setup-msbuild@v2
 
-jobs:
-  build-windows-dll:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build DLL
-      run: |
-        cl /LD encrypt_1.cpp /Feencrypt1.dll
-    - name: Upload DLL
-      uses: actions/upload-artifact@v4
-      with:
-        name: encrypt1
-        path: encrypt1.dll
+- name: Build DLL
+  run: |
+    cl /LD encrypt_1.cpp /Feencrypt1.dll
+
+- name: Upload DLL
+  uses: actions/upload-artifact@v4
+  with:
+    name: encrypt1
+    path: encrypt1.dll
