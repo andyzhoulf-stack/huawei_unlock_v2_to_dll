@@ -7,31 +7,32 @@ on:
 
 jobs:
   build-windows-dll:
-    runs-on: windows-latest
+    runs-on: windows-2025
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup MSVC environment and build DLL
+      - name: Setup MSVC and build DLL
         shell: cmd
         run: |
-          if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat" (
-            call "%ProgramFiles%\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          ) else if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat" (
-            call "%ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat"
-          ) else if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat" (
-            call "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-          ) else if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat" (
+          for %%V in (Enterprise Professional Community) do (
+            if exist "%ProgramFiles%\Microsoft Visual Studio\2022\%%V\VC\Auxiliary\Build\vcvars64.bat" (
+              call "%ProgramFiles%\Microsoft Visual Studio\2022\%%V\VC\Auxiliary\Build\vcvars64.bat"
+              goto found
+            )
+          )
+          if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat" (
             call "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
           ) else (
             echo Could not find vcvars64.bat!
             exit 1
           )
-          cl /LD encrypt_1.cpp /Feencrypt1.dll
+          :found
+          cl /LD encrypt_1.cpp encrypt_2.cpp encrypt_3.cpp encrypt_4.cpp encrypt_5_v2.cpp encrypt_6.cpp encrypt_7.cpp encrypt_v1.cpp /Feencrypt.dll
 
       - name: Upload DLL artifact
         uses: actions/upload-artifact@v4
         with:
-          name: encrypt1
-          path: encrypt1.dll
+          name: encrypt
+          path: encrypt.dll
