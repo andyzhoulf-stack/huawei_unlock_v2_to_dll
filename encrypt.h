@@ -1,7 +1,9 @@
 #ifndef ENCRYPT_H
 #define ENCRYPT_H
+
 #include <cstring> // C++风格
 #pragma once
+
 #ifdef _WIN32
 #define DLL_EXPORT extern "C" __declspec(dllexport)
 #else
@@ -9,3 +11,5 @@
 #endif
 
 DLL_EXPORT void encrypt_1(char* imei, char* resbuf, int version);
+
+#endif // ENCRYPT_H
