@@ -8,20 +8,20 @@ on:
 
 jobs:
   build-windows-dll:
-    runs-on: windows-latest
+    runs-on: windows-2025
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-
-      - name: Build DLL
-        run: cl /LD encrypt_1.cpp /Feencrypt1.dll
+      - name: Setup Developer Command Prompt and Build DLL
+        shell: cmd
+        run: |
+          call "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+          cl /LD encrypt_1.cpp /Feencrypt1.dll
 
       - name: Upload DLL artifact
-        uses: actions/upload-artifact@v4    # 注意这里用的是 v4，不是 v3
+        uses: actions/upload-artifact@v4
         with:
           name: encrypt1
           path: encrypt1.dll
