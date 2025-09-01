@@ -1,3 +1,6 @@
+#ifndef ENCRYPT_H
+#define ENCRYPT_H
+#include <cstring> // C++风格
 #pragma once
 #ifdef _WIN32
 #define DLL_EXPORT extern "C" __declspec(dllexport)
