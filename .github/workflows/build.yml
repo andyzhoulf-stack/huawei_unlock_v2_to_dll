@@ -1,5 +1,7 @@
 name: Build DLL
-
+#ifndef ENCRYPT_H
+#define ENCRYPT_H
+#include <cstring> // C++风格
 on:
   push:
     branches: [main]
@@ -35,3 +37,4 @@ jobs:
         with:
           name: encrypt1
           path: encrypt1.dll
+#endif
