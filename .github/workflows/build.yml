@@ -2,8 +2,7 @@ name: Build DLL
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
 
 jobs:
@@ -14,14 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Developer Command Prompt and Build DLL
+      - name: Setup MSVC environment and build DLL
         shell: cmd
         run: |
-          call "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-          cl /LD encrypt_1.cpp /Feencrypt1.dll
-
-      - name: Upload DLL artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: encrypt1
-          path: encrypt1.dll
+          setlocal EnableDelayedExpansion
+          set found=0
+          for %%E in (Enterprise Professional Community BuildTools) do (
+            if exist "%ProgramFiles%\Microsoft Visual Studio\
