@@ -1,15 +1,4 @@
 name: Build DLL
-- name: Install vcpkg
-  run: |
-    git clone https://github.com/microsoft/vcpkg.git
-    .\vcpkg\bootstrap-vcpkg.bat
-
-- name: Install OpenSSL
-  run: .\vcpkg\vcpkg.exe install openssl:x64-windows
-
-- name: Set VCPKG env
-  run: echo "VCPKG_ROOT=${{ github.workspace }}\vcpkg" >> $env:GITHUB_ENV
-
 
 on:
   push:
@@ -18,11 +7,19 @@ on:
 
 jobs:
   build-windows-dll:
-    runs-on: windows-2025
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Install vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          .\vcpkg\bootstrap-vcpkg.bat
+
+      - name: Install OpenSSL
+        run: .\vcpkg\vcpkg.exe install openssl:x64-windows
 
       - name: Setup MSVC and build DLL
         shell: cmd
@@ -41,9 +38,8 @@ jobs:
           )
           :found
           cl /LD encrypt_*.cpp /Feencrypt.dll ^
-  /I "%GITHUB_WORKSPACE%\vcpkg\installed\x64-windows\include" ^
-  /link /LIBPATH:"%GITHUB_WORKSPACE%\vcpkg\installed\x64-windows\lib" libcrypto.lib libssl.lib
-
+            /I "%GITHUB_WORKSPACE%\vcpkg\installed\x64-windows\include" ^
+            /link /LIBPATH:"%GITHUB_WORKSPACE%\vcpkg\installed\x64-windows\lib" libcrypto.lib libssl.lib
 
       - name: Upload DLL artifact
         uses: actions/upload-artifact@v4
