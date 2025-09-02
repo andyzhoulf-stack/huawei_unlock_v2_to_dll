@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #ifndef ENCRYPT_H
 #define ENCRYPT_H
 
