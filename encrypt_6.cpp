@@ -8,6 +8,8 @@
 //
 
 #include "encrypt.h"
+#include <cstring>
+#include <cstdio>
 
 void rehash5(unsigned int* hash) {
 
