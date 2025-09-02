@@ -8,6 +8,8 @@
 //
 
 #include "encrypt.h"
+#include <cstring>
+#include <cstdio>
 
 #define imeilen 15;
 
