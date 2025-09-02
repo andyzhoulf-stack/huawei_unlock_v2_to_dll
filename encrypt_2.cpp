@@ -8,6 +8,10 @@
 //
 
 #include "encrypt.h"
+std::memset(...);
+std::strcpy(...);
+std::printf(...);
+
 
 void encrypt_2(char* imei,char* resbuf,int version) {
   
