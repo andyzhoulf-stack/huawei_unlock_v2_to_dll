@@ -8,6 +8,8 @@
 //
 
 #include "encrypt.h"
+#include <cstring>
+#include <cstdio>
 
 
 void rehash7_2(int* hash,int* srcbuf) {
