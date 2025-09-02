@@ -11,15 +11,6 @@
 #include <string.h>
 #include <stdio.h>
 
-void your_function() {
-    char buf[100];
-    memset(buf, 0, sizeof(buf));
-    size_t len = strlen(buf);
-    sprintf(buf, "len=%zu", len);
-    strcpy(buf, "hello");
-    strncat(buf, " world", 99 - strlen(buf));
-}
-
 
 void encrypt_1(char* imei,char* resbuf,int version) {
 
