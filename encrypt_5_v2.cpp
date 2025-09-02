@@ -8,6 +8,8 @@
 //
 
 #include "encrypt.h"
+#include <cstring>
+#include <cstdio>
 
 void GetEncrySStr(char* buf, char* phash, int off) {
   
