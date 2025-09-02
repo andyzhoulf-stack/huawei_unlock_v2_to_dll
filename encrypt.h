@@ -13,16 +13,16 @@
 #    define DLL_EXPORT __declspec(dllexport)
 #  endif
 #else
-#  ifdef __cplusplus
-#    define DLL_EXPORT extern "C"
-#  else
-#    define DLL_EXPORT
-#  endif
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-// rotr32一般做内部工具函数，不导出；如果你需要导出，则加DLL_EXPORT
-// uint32_t rotr32(uint32_t value, unsigned int count);
-uint32_t rotr32(uint32_t value, unsigned int count); // 内部函数，不导出
+uint32_t rotr32(uint32_t value, unsigned int count);
+
+#ifdef __cplusplus
+}
+#endif
+
 
 DLL_EXPORT int calc201(char* imei, char* resbuf);
 DLL_EXPORT int calc2(char* imei, char* resbuf);
