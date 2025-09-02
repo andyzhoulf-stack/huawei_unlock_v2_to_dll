@@ -18,6 +18,12 @@
 //
 // version=2 для v2 и 201 для v201
 
+#include "encrypt.h"
+
+uint32_t rotr32(uint32_t value, unsigned int count) {
+    return (value >> count) | (value << (32 - count));
+}
+
 int proc_index(char* imeibuf,int version) {
 
 int i;
