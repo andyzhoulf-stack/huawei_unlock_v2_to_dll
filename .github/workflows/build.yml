@@ -40,7 +40,6 @@ jobs:
             /link /LIBPATH:"%GITHUB_WORKSPACE%\vcpkg\installed\x64-windows\lib" libcrypto.lib libssl.lib
           cl /LD encrypt_1.cpp encrypt_2.cpp ... rotr32.cpp
 
-
       - name: Upload DLL artifact
         uses: actions/upload-artifact@v4
         with:
