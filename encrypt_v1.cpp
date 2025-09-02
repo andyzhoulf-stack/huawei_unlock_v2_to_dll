@@ -8,6 +8,8 @@
 //
 #include <openssl/md5.h>
 #include "encrypt.h"
+#include <cstring>
+#include <cstdio>
 
 void encrypt_v1(char* imei, char* resbuf,char* hstr) {
   
