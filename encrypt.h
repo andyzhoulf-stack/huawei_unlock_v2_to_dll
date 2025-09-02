@@ -1,7 +1,7 @@
 #ifndef ENCRYPT_H
 #define ENCRYPT_H
 
-#include <stdint.h>
+#include <cstdint> // for uint32_t
 
 #ifdef _WIN32
 #define DLL_EXPORT __declspec(dllexport)
