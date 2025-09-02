@@ -5,6 +5,10 @@
 //  2014 год
 //
 #include "encrypt.h"
+std::memset(...);
+std::strcpy(...);
+std::printf(...);
+
 
 
 // Вычисление индекса обработчика по хешу IMEI, и вызов его
